@@ -26,6 +26,17 @@ This repository is designed as a **portfolio of API extraction projects**, demon
 
 ---
 
+### 3. `github.py`  
+- **API:** [GitHub REST API]
+- **Purpose:** Fetches repositories from GitHub and extracts key details.  
+- **Features:**  
+  - Fetches repositories based on a search keyword.  
+  - Extracts repository name and number of watchers. 
+  - Supports pagination (currently fetching first 30 repos by default).
+  - Prints results in a readable format or can be saved for further processing.
+
+---
+
 ## 🚀 Tech Stack  
 - **Language:** Python  
 - **Libraries:** `requests`, `json`, `dotenv`, `csv`  
