@@ -1,4 +1,5 @@
 import requests
+import json
 
 params = {
     "limit":20,
@@ -21,4 +22,8 @@ while base_url and len(pokemon_list) < 200:
         print(f"Error: {response.status_code} - {response.text}")
         break
 
-print(pokemon_list)
+# Save to JSON file
+with open("pokemons.json", "w") as f:
+    json.dump(pokemon_list, f, indent=4)
+
+print(f"Saved {len(pokemon_list)} Pokemons in pokemons.json")
