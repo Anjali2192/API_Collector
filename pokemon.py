@@ -1,5 +1,4 @@
 import requests
-import json
 
 params = {
     "limit":20,
@@ -8,16 +7,18 @@ params = {
 
 base_url = "https://pokeapi.co/api/v2/pokemon"
 
-response = requests.get(base_url, params = params)
+pokemon_list = []
 
-if response.status_code == 200:
-    data = response.json()
-    result = data["results"]
-    
-    for i,pokemon in enumerate(result):
-        print(i+1)
-        print(pokemon["name"])
-        print(pokemon["url"])
-        print()
-else:
-    print(f"Error: {response.status_code} - {response.text}")
+while base_url and len(pokemon_list) < 200:
+    response = requests.get(base_url, params=params)
+
+    if response.status_code == 200:
+        data = response.json()
+        pokemon_list.extend(data["results"])
+        base_url = data["next"]
+
+    else:
+        print(f"Error: {response.status_code} - {response.text}")
+        break
+
+print(pokemon_list)
