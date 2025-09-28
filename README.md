@@ -37,6 +37,26 @@ This repository is designed as a **portfolio of API extraction projects**, demon
 
 ---
 
+### 4. `pokemon.py`
+- Uses the **PokéAPI** to fetch Pokémon data.
+- Demonstrates pagination using the `"next"` URL in API responses.
+- Collects the first **200 Pokémon names and URLs**.
+- Saves the results into a JSON file (`pokemons.json`).
+- Example JSON structure:
+  ```json
+  [
+    {
+      "name": "bulbasaur",
+      "url": "https://pokeapi.co/api/v2/pokemon/1/"
+    },
+    {
+      "name": "ivysaur",
+      "url": "https://pokeapi.co/api/v2/pokemon/2/"
+    }
+  ]
+  
+---
+
 ## 🚀 Tech Stack  
 - **Language:** Python  
 - **Libraries:** `requests`, `json`, `dotenv`, `csv`  
