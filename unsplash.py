@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 API_KEY = os.getenv("unsplash_KEY")
 
-url = "https://api.unsplash.com/photos"
+url = "https://api.unsplash.com/search/photos"
 
 headers = {
     "Accept-Version": "v1",
@@ -14,21 +14,27 @@ headers = {
 }
 
 page = 1
+all_urls = []
 
-params = {
-    "page": page,
-    "per_page": 30
-}
+while True:
+    params = {
+        "page": page,
+        "per_page": 30,
+        "query": "nature"
+    }
 
-while page <= 2:
     response = requests.get(url, headers=headers, params=params)
+    
     if response.status_code == 200:
         data = response.json()
-        page += 1
-        for photo in data:
-            link = photo["urls"]["regular"]        
+        if not data:
+            break
 
-            print(f"url: {link}")        
+        result = data["results"]
+        page += 1
+        for i,photo in enumerate(result):
+            link = photo["urls"]["regular"]       
+            all_urls.append(link)            
 
     else:
         print(f"Error: {response.status_code} - {response.text}")
@@ -38,3 +44,5 @@ remaining = response.headers.get("X-Ratelimit-Remaining")
 
 print(f"Rate Limit: {limit}")
 print(f"Remaining: {remaining}")
+
+print(F"Total unique urls collected: {len(set(all_urls))}")
