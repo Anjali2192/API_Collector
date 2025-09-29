@@ -12,9 +12,10 @@ This repository is designed as a **portfolio of API extraction projects**, demon
 - **Purpose:** Fetches images from the Pexels API.  
 - **Features:**  
   - Uses API key stored in `.env` for secure authentication.  
-  - Handles parameters (like search queries, orientation, size).  
-  - Extracts photo details (URL, photographer, dimensions).  
-  - Stores results in JSON/CSV.  
+  - Handles pagination.  
+  - Extracts photo details (URL, id).  
+  - Stores results in JSON. 
+  - Includes error handling(try/except). 
 
 ---
 
