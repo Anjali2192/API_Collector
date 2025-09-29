@@ -13,22 +13,25 @@ headers = {
     "Authorization": API_KEY
 }
 
+page = 1
+
 params = {
-    "page": 1,
+    "page": page,
     "per_page": 30
 }
 
-response = requests.get(url, headers=headers, params=params)
-if response.status_code == 200:
-    data = response.json()
-    
-    for photo in data:
-        url = photo["urls"]["regular"]    
+while page <= 2:
+    response = requests.get(url, headers=headers, params=params)
+    if response.status_code == 200:
+        data = response.json()
+        page += 1
+        for photo in data:
+            link = photo["urls"]["regular"]        
 
-        print(f"url: {url}")    
+            print(f"url: {link}")        
 
-else:
-    print(f"Error: {response.status_code} - {response.text}")
+    else:
+        print(f"Error: {response.status_code} - {response.text}")
 
 limit = response.headers.get("X-Ratelimit-Limit")
 remaining = response.headers.get("X-Ratelimit-Remaining")    
