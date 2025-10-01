@@ -14,9 +14,10 @@ headers = {
 }
 
 page = 1
+
 all_urls = []
 
-while True:
+while len(all_urls) < 1000 :
     params = {
         "page": page,
         "per_page": 30,
@@ -24,25 +25,25 @@ while True:
     }
 
     response = requests.get(url, headers=headers, params=params)
-    
+     
     if response.status_code == 200:
         data = response.json()
-        if not data:
-            break
-
-        result = data["results"]
         page += 1
-        for i,photo in enumerate(result):
+        result = data["results"]
+        for photo in result:
             link = photo["urls"]["regular"]       
-            all_urls.append(link)            
+            all_urls.append(link)          
+        print(f"Fetching page: {page}, total collected: {len(all_urls)}")
 
     else:
         print(f"Error: {response.status_code} - {response.text}")
+
+# Save data to JSON file
+with open("photo.json", "w") as f:
+    json.dump(all_urls, f, indent=4)
 
 limit = response.headers.get("X-Ratelimit-Limit")
 remaining = response.headers.get("X-Ratelimit-Remaining")    
 
 print(f"Rate Limit: {limit}")
 print(f"Remaining: {remaining}")
-
-print(F"Total unique urls collected: {len(set(all_urls))}")
