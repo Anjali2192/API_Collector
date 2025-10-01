@@ -58,6 +58,18 @@ This repository is designed as a **portfolio of API extraction projects**, demon
   
 ---
 
+### 5. `unsplash.py`
+- **API:** [Unsplash API]
+- **Purpose:** Fetches images from the Unspalsh API.  
+- **Features:**  
+  - Uses API key stored in `.env` for secure authentication.  
+  - Uses pagination to collect multiple pages of results (e.g., 1000+ images). 
+  - Extracts photo details (URL).  
+  - Saves all collected URLs into a JSON file (photo.json). 
+  - Includes error handling(try/except).
+
+---
+
 ## 🚀 Tech Stack  
 - **Language:** Python  
 - **Libraries:** `requests`, `json`, `dotenv`, `csv`  
